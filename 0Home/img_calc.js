@@ -90,7 +90,28 @@ function icalc3(ip,op,scalar){
 				func = isub;
 			}
 			else{
-				IJ.showMessage('ERR: Unknown Op');
+
+			}
+			let newPix = func(pix,scalar);
+			//Set new Pixel value
+			ip.set(i,clamp(newPix,0,255));
+		}
+}
+function icalc4(ip,op,scalar){
+
+	const operators = {
+		add : iadd,
+		sub : isub,
+		div : idiv,
+		mul : imul, 
+	};
+	for(let i = 0; i < w * h; i++){
+			//Get Pixel value
+			let pix = ip.get(i);
+			//Calc
+			let func = operators[op];
+			if (func === undefined){
+				IJ.showMessage('ERR: Unknown Op')
 				throw('End of Script');
 			}
 			let newPix = func(pix,scalar);
@@ -105,7 +126,7 @@ let ip = imp.getProcessor();
 let w = imp.getWidth();
 let h = imp.getHeight(); 
 
-icalc2(ip,'div',2);
+icalc4(ip,'div',2);
 imp.updateAndDraw();
 
 /*
@@ -133,3 +154,4 @@ public void setf(int index, float value)
 public void putPixel(int x, int y, int value)
 public void putPixelValue(int x, int y, double value)
 */
+

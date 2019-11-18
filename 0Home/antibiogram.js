@@ -30,4 +30,3 @@ IJ.setAutoThreshold(green, "Otsu dark b&w");
 
 //Step 6:Image Analyse
 IJ.run(green, "Analyze Particles...", "size=500-Infinity circularity=0.60-1.00 show=Outlines display clear");
-
